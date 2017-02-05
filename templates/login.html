@@ -1,0 +1,41 @@
+{% load staticfiles %}
+<html>
+<style type="text/css">
+#LoginBox{margin:100px auto ;background: #ccc;width: 300px;}
+.close_btn{float:right;margin-right:1px;color: #000;font-family: arial;}
+a#closeBtn {
+    text-decoration: initial;
+}
+ul.errorlist{display: none}
+form {
+	text-align: center;
+	height: 300px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+}
+
+</style>
+<link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}" />
+<meta charset="utf-8">
+<body>
+<div>
+	<div class="bg blur"></div>
+	<div id="LoginBox">
+		<form method='POST' action="" >{% csrf_token %}
+		<div class="row">
+			<a href="javascript:void(0)" title="关闭窗口" class="close_btn" id="closeBtn">x</a>
+		</div>
+		<div class="context">
+		{% for item in form %}
+			<br>{{item.label}} 
+			{{item}}
+			{% endfor %}
+				<div class="row">
+					<input type="submit" value="登   录" />
+				</div>
+		</div>
+	<a href="#">不能登录？</a>
+	</form>
+	</div>
+</div>
+</body>
+</html>
