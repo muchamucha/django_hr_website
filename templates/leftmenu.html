@@ -1,9 +1,39 @@
-{% extends "base.html" %}
 {% load staticfiles %}
-{% block leftmenu %}
+<!--
+	mouseover鼠标移入 onmouseover
+-->
+<script src="{% static 'js/jquery-3.1.1.js' %}">
+	$(document).ready((){ //加载DOM元素
+		$('.link').mouseover(function(){
+				$(this).children('.sub_link').css('display','block');
+			}) //$==.对应class #对应 id
+		$('.link').mouseout(function(){
+				$(this).children('.sub_link').css('display','block')
+			})
+	)
+
+	
+	
+
+</script>
+
 <ul>
 	{% for item in menus %}
-		<li>{{item}}</li>
+		{% if item.menulevel == "P" %}
+		<div id="link">
+			<li>
+				<a href="{{item.link}}">{{item.label}}</a>
+					</li>
+				{% endif %}				
+						{% for sub_item in item.left_set.all %}
+							<div id="sub_link">
+								<li>
+									<a href="{{sub_item.link}}">{{sub_item.label}}</a>
+								</li>
+							</div>
+						{% endfor %}
+						
+		</div>
+		
 	{% endfor %}
 </ul>
-{% endblock %}
